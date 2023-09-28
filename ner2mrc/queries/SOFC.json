@@ -1,0 +1,6 @@
+{
+    "MATERIAL": "Fuel cell’s material.",
+    "DEVICE": "The type of device used in the fuel cell experiment (e.g., IT-SOFC).",
+    "EXPERIMENT": "Experiment related operations such as test, perform, and report.",
+    "VALUE": "Annotate the values and their respective units with the VALUE type (for example, above 750◦C, 1.0 W cm −2)."
+}
