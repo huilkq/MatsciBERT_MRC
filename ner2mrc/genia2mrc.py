@@ -206,7 +206,7 @@ def bio_to_triples(bio_file_path, triples_file_path):
 def main():
     genia_raw_dir = r"D:\pythonProject\MatsciBERT_MRC\datasets\Metal"
     genia_mrc_dir = r"D:\pythonProject\MatsciBERT_MRC\datasets\Metal\mrc_format"
-    tag2query_file = "queries/genia.json"
+    tag2query_file = "queries/Matscholar.json"
     os.makedirs(genia_mrc_dir, exist_ok=True)
     for phase in ["train", "dev", "test"]:
         old_file = os.path.join(genia_raw_dir, f"{phase}.txt")
