@@ -3,7 +3,7 @@ import json
 import torch
 
 
-# 读取本地数据集
+# Read the local data set
 class DataProcessor(object):
     """Base class for data converters for sequence classification data sets."""
 
@@ -228,7 +228,7 @@ def bert_extract_items(start_logits, end_logits):
                 S.append((s_l, i, i + j))
                 break
 
-    # 以下代码得到S_final。 即将得到的(2, 5, 15), (2, 11, 15)只保留一个(2, 11, 15)。
+    # The following code gets S_final. (2, 5, 15), (2, 11, 15) keep only one (2, 11, 15).
     # S_final = []
     # if len(S) < 2:
     #     S_final = S
@@ -254,7 +254,7 @@ def bert_extract_item(start_logits, end_logits):
                 S.append((s_l, i, i + j))
                 break
 
-    # 以下代码得到S_final。 即将得到的(2, 5, 15), (2, 11, 15)只保留一个(2, 11, 15)。
+    # The following code gets S_final. (2, 5, 15), (2, 11, 15) keep only one (2, 11, 15).
     S_final = []
     if len(S) < 2:
         S_final = S
