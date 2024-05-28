@@ -63,7 +63,7 @@ The input data format of the entity model is JSONL. Each line of the input file 
 ```
 ### Train/evaluate the entity model
 
-You can use `run_entity.py` with `--do_train` to train an entity model and with `--do_eval` to evaluate an entity model.
+You can use `run_ner_bert_mac.py` with `--do_train` to train an entity model and with `--do_eval` to evaluate an entity model.
 A trianing command template is as follow:
 ```bash
 python run_ner_bert_mac.py \
