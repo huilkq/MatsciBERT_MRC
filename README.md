@@ -1,11 +1,4 @@
 # MatsciBERT_MRC
-## Overview
-In this work, we present a simple approach for entity and relation extraction. Our approach contains three conponents:
-
-1. The **entity model** takes a piece of text as input and predicts all the entities at once.
-2. The **relation model** considers every pair of entities independently by inserting typed entity markers, and predicts the relation type for each pair.
-3. The **approximation relation model** supports batch computations, which enables efficient inference for the relation model.
-
 
 ## Setup
 
