@@ -122,7 +122,7 @@ def read_json(input_file):
 
 import json
 
-# 定义每种实体类型对应的query
+# Define a query for each entity type
 # queries_Metal = {'MAT': 'Any inorganic solid or alloy, any non-gaseous element.',
 #                  'SPL': 'Names for crystal structures/phases.',
 #                  'DSC': 'Special descriptions of the type/shape of the sample.',
