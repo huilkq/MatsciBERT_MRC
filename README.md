@@ -42,6 +42,43 @@ python run_entity.py \
 ### Input data format for the entity model
 
 The input data format of the entity model is JSONL. Each line of the input file contains one document in the following format.
+  {
+    "context": [
+      "variable",
+      "temperature",
+      "electron",
+      "paramagnetic",
+      "resonance",
+      "studies",
+      "of",
+      "the",
+      "NiZn",
+      "ferrite",
+      "/",
+      "O2Si",
+      "nanocomposite"
+    ],
+    "query": "Any inorganic solid or alloy, any non-gaseous element.",
+    "start_position": [
+      8,
+      11
+    ],
+    "end_position": [
+      10,
+      12
+    ],
+    "span_position": [
+      [
+        8,
+        10
+      ],
+      [
+        11,
+        12
+      ]
+    ],
+    "entity_label": "MAT"
+  }
 
 ### Train/evaluate the entity model
 
