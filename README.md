@@ -12,9 +12,11 @@ Please find more details of this work in our [paper](https://arxiv.org/pdf/2010.
 ## Setup
 
 ### Install dependencies
-Please install all the dependency packages using the following command:
 ```
-pip install -r requirements.txt
+Python==3.8.12; 
+torch==1.12.1;
+numpy;
+pandas
 ```
 
 ### Download and preprocess the datasets
@@ -353,9 +355,3 @@ Script parameter interpretation
 *I. Data & Model:
 **Put train, dev, test and other data in the datasets folder (sample data has been given, as long as it conforms to the format)
 
-
-## environment
-Python==3.8.12; 
-torch==1.12.1;
-numpy;
-pandas
