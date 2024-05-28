@@ -1,27 +1,4 @@
 # MatsciBERT_MRC
- PURE: Entity and Relation Extraction from Text
-
-This repository contains  (PyTorch) code and pre-trained models for PURE (the **P**rinceton **U**niversity **R**elation **E**xtraction system), described by the paper: [A Frustratingly Easy Approach for Entity and Relation Extraction](https://arxiv.org/pdf/2010.12812.pdf).
-
-## Quick links
-* [Overview](#Overview)
-* [Setup](#Setup)
-  * [Install dependencies](#Install-dependencies)
-  * [Data preprocessing](#Download-and-preprocess-the-datasets)
-* [Quick Start](#Quick-start)
-* [Entity Model](#Entity-Model)
-  * [Input data format](#Input-data-format-for-the-entity-model)
-  * [Train/evaluate the entity model](#Train/evaluate-the-entity-model)
-* [Relation Model](#Relation-Model)
-  * [Input data format](#Input-data-format-for-the-relation-model)
-  * [Train/evaluate the relation model](#Train/evaluate-the-relation-model)
-  * [Approximation relation model](#Approximation-relation-model)
-* [Pre-trained Models](#Pre-trained-Models)
-  * [Pre-trained models for ACE05](#Pre-trained-models-for-ACE05)
-  * [Pre-trained models for SciERC](#Pre-trained-models-for-SciERC)
-* [Bugs or Questions?](#Bugs-or-questions)
-* [Citation](#Citation)
-
 ## Overview
 ![](./figs/overview.png)
 In this work, we present a simple approach for entity and relation extraction. Our approach contains three conponents:
