@@ -18,25 +18,6 @@ Our experiments are based on five datasets: BC4CHEMD, Matscholar, NLMChem, SOFC-
 ## Quick Start
 The following commands can be used to download the preprocessed Matscholar dataset and run our pre-trained models on Matscholar.
 
-```bash
-# Download the SciERC dataset
-
-# Download the pre-trained models
-mkdir scierc_models; cd scierc_models
-
-cd ..
-
-# Run the pre-trained model
-python run_entity.py \
-    --do_eval --eval_test \
-    --context_window 0 \
-    --task scierc \
-    --data_dir ${scierc_dataset} \
-    --model allenai/scibert_scivocab_uncased \
-    --output_dir ${scierc_ent_model}
-
-
-
 ## Entity Model
 
 ### Input data format for the entity model
@@ -85,27 +66,23 @@ The input data format of the entity model is JSONL. Each line of the input file 
 You can use `run_entity.py` with `--do_train` to train an entity model and with `--do_eval` to evaluate an entity model.
 A trianing command template is as follow:
 ```bash
-python run_entity.py \
+python run_ner_bert_mac.py \
     --do_train --do_eval [--eval_test] \
-    --learning_rate=1e-5 --task_learning_rate=5e-4 \
-    --train_batch_size=16 \
-    --context_window {0 | 100 | 300} \
-    --task {ace05 | ace04 | scierc} \
+    --learning_rate=2e-5 \
+    --max_seq_length=512 \
+    --other_learning_rate=1e-3 \
+    --train_batch_size=8 \
     --data_dir {directory of preprocessed dataset} \
-    --model {bert-base-uncased | albert-xxlarge-v1 | allenai/scibert_scivocab_uncased} \
-    --output_dir {directory of output files}
+    --model_name_or_path {bert-base-uncased | matscibert | scibert | biobert} \
+    --output_dir {directory of output files} \
+    --loss_type {lsr | focal | ce}
 ```
 Arguments:
 * `--learning_rate`: the learning rate for BERT encoder parameters.
-* `--task_learning_rate`: the learning rate for task-specific parameters, i.e., the classifier head after the encoder.
-* `--context_window`: the context window size used in the model. `0` means using no contexts. In our cross-sentence entity experiments, we use `--context_window 300` for BERT models and SciBERT models and use `--context_window 100` for ALBERT models.
-* `--model`: the base transformer model. We use `bert-base-uncased` and `albert-xxlarge-v1` for ACE04/ACE05 and use `allenai/scibert_scivocab_uncased` for SciERC.
+* `--other_learning_rate`: the learning rate for task-specific parameters, i.e., the classifier head after the encoder.
+* `--loss_type`: the loss_type used in the model. 
+* `--model_name_or_path`: the base transformer model. 
 * `--eval_test`: whether evaluate on the test set or not.
 
-The predictions of the entity model will be saved as a file (`ent_pred_dev.json`) in the `output_dir` directory. If you set `--eval_test`, the predictions (`ent_pred_test.json`) are on the test set. The prediction file of the entity model will be the input file of the relation model.
-
-
-
-*I. Data & Model:
-**Put train, dev, test and other data in the datasets folder (sample data has been given, as long as it conforms to the format)
+Put train, dev, test and other data in the datasets folder (sample data has been given, as long as it conforms to the format)
 
