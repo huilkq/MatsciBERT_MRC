@@ -69,36 +69,6 @@ python run_entity.py \
 ### Input data format for the entity model
 
 The input data format of the entity model is JSONL. Each line of the input file contains one document in the following format.
-```
-{
-  # document ID (please make sure doc_key can be used to identify a certain document)
-  "doc_key": "CNN_ENG_20030306_083604.6",
-
-  # sentences in the document, each sentence is a list of tokens
-  "sentences": [
-    [...],
-    [...],
-    ["tens", "of", "thousands", "of", "college", ...],
-    ...
-  ],
-
-  # entities (boundaries and entity type) in each sentence
-  "ner": [
-    [...],
-    [...],
-    [[26, 26, "LOC"], [14, 14, "PER"], ...], #the boundary positions are indexed in the document level
-    ...,
-  ],
-
-  # relations (two spans and relation type) in each sentence
-  "relations": [
-    [...],
-    [...],
-    [[14, 14, 10, 10, "ORG-AFF"], [14, 14, 12, 13, "ORG-AFF"], ...],
-    ...
-  ]
-}
-```
 
 ### Train/evaluate the entity model
 
