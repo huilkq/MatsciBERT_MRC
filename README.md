@@ -20,7 +20,7 @@ pandas
 ```
 
 ### Download and preprocess the datasets
-Our experiments are based on three datasets: ACE04, ACE05, and SciERC. Please find the links and pre-processing below:
+Our experiments are based on five datasets: BC4CHEMD, Matscholar, NLMChem, SOFC-Slot and SOFC. Please find the links and pre-processing below:
 * ACE04/ACE05: We use the preprocessing code from [DyGIE repo](https://github.com/luanyi/DyGIE/tree/master/preprocessing). Please follow the instructions to preprocess the ACE05 and ACE04 datasets.
 * SciERC: The preprocessed SciERC dataset can be downloaded in their project [website](http://nlp.cs.washington.edu/sciIE/).
 
@@ -62,35 +62,7 @@ python run_entity.py \
     --model allenai/scibert_scivocab_uncased \
     --output_dir ${scierc_ent_model}
 
-# Run the pre-trained full relation model
-python run_relation.py \
-  --task scierc \
-  --do_eval --eval_test \
-  --model allenai/scibert_scivocab_uncased \
-  --do_lower_case \
-  --context_window 0\
-  --max_seq_length 128 \
-  --entity_output_dir ${scierc_ent_model} \
-  --output_dir ${scierc_rel_model}
-  
-# Output end-to-end evaluation results
-python run_eval.py --prediction_file ${scierc_rel_model}/predictions.json
 
-# Run the pre-trained approximation relation model (with batch computation)
-python run_relation_approx.py \
-  --task scierc \
-  --do_eval --eval_test \
-  --model allenai/scibert_scivocab_uncased \
-  --do_lower_case \
-  --context_window 0\
-  --max_seq_length 250 \
-  --entity_output_dir ${scierc_ent_model} \
-  --output_dir ${scierc_rel_model_approx} \
-  --batch_computation
-
-# Output end-to-end evaluation results
-python run_eval.py --prediction_file ${scierc_rel_model_approx}/predictions.json
-```
 
 ## Entity Model
 
