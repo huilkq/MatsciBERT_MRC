@@ -30,18 +30,12 @@ The following commands can be used to download the preprocessed Matscholar datas
 ```bash
 # Download the SciERC dataset
 
-# Download the pre-trained models (single-sentence)
+# Download the pre-trained models
 mkdir scierc_models; cd scierc_models
-
-# Download the pre-trained entity model
-
-# Download the pre-trained full relation model
-
-# Download the pre-trained approximation relation model
 
 cd ..
 
-# Run the pre-trained entity model, the result will be stored in ${scierc_ent_model}/ent_pred_test.json
+# Run the pre-trained model
 python run_entity.py \
     --do_eval --eval_test \
     --context_window 0 \
