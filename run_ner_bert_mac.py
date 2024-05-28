@@ -1,3 +1,4 @@
+## Import custom modules and utility functions
 import os
 import torch
 from torch.utils.data import DataLoader, RandomSampler, TensorDataset, SequentialSampler
@@ -18,6 +19,7 @@ from processors.ner_span import collate_fn
 from metrics.ner_metrics import SpanEntityScore
 from processors.utils_ner import bert_extract_item, bert_extract_items
 
+# Set up CUDA visible device
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 MODEL_CLASSES = {
     ## bert ernie bert_wwm bert_wwwm_ext
@@ -31,6 +33,7 @@ def train(args, train_dataset, model, tokenizer):
     train_sampler = RandomSampler(train_dataset) if args.local_rank == -1 else DistributedSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.batch_size,
                                   collate_fn=collate_fn)
+    # Calculate total training steps
     if args.max_steps > 0:
         t_total = args.max_steps
         args.num_train_epochs = args.max_steps // (len(train_dataloader) // args.gradient_accumulation_steps) + 1
@@ -38,7 +41,6 @@ def train(args, train_dataset, model, tokenizer):
         t_total = len(train_dataloader) // args.gradient_accumulation_steps * args.num_train_epochs
 
     # Prepare optimizer and schedule (linear warmup and decay)
-
     no_decay = ['bias', 'LayerNorm.weight']
     # param_optimizer = list(model.named_parameters())
     # optimizer_grouped_parameters = [
@@ -73,7 +75,7 @@ def train(args, train_dataset, model, tokenizer):
 
     print('t_total:', t_total)
 
-    # Train!
+   # Start training
     print("***** Running training *****")
     print("  Num examples = %d", len(train_dataset))
     print("  Num Epochs = %d", args.num_train_epochs)
@@ -128,6 +130,7 @@ def train(args, train_dataset, model, tokenizer):
 
 
 def evaluate(args, model, tokenizer, prefix=""):
+    """ Evaluation Model """
     metric = SpanEntityScore(args.id2label)
     eval_output_dir = args.output_dir
     if not os.path.exists(eval_output_dir) and args.local_rank in [-1, 0]:
@@ -178,6 +181,7 @@ def evaluate(args, model, tokenizer, prefix=""):
 
 
 def predict(args, model, tokenizer, prefix=""):
+    "" Predictive Model ""
     metric = SpanEntityScore(args.id2label)
     eval_output_dir = args.output_dir
     if not os.path.exists(eval_output_dir) and args.local_rank in [-1, 0]:
@@ -228,7 +232,9 @@ def predict(args, model, tokenizer, prefix=""):
 
 
 def load_and_cache_examples(args, task, tokenizer, data_type='train'):
+    """ Load and cache data set """
     processor = processors[task]()
+    
     # Load data features from cache or dataset file
     cached_features_file = os.path.join(
         args.data_dir, "cached_{}_{}_{}".format(data_type, tokenizer.__class__.__name__, str(args.max_seq_length)),
@@ -253,6 +259,7 @@ def load_and_cache_examples(args, task, tokenizer, data_type='train'):
                                                 args.eval_max_seq_length
                                                 )
         torch.save(features, cached_features_file)
+        
     # Convert to Tensors and build dataset
     if data_type == 'dev' or data_type == 'test':
         return features
@@ -268,6 +275,7 @@ def load_and_cache_examples(args, task, tokenizer, data_type='train'):
 
 def main():
     args = get_argparse().parse_args()
+    
     # Setup distant debugging if needed
     if args.server_ip and args.server_port:
         # Distant debugging - see https://code.visualstudio.com/docs/python/debugging#_attach-to-a-local-script
@@ -275,6 +283,7 @@ def main():
         print("Waiting for debugger attach")
         ptvsd.enable_attach(address=(args.server_ip, args.server_port), redirect_output=True)
         ptvsd.wait_for_attach()
+        
     # Setup CUDA, GPU & distributed training
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     args.n_gpu = 1
@@ -283,6 +292,7 @@ def main():
                    args.local_rank, device, args.n_gpu, bool(args.local_rank != -1), args.fp16, )
     # Set seed
     seed_everything(args.seed)
+    
     # Prepare NER task
     args.task_name = args.task_name.lower()
     if args.task_name not in processors:
@@ -294,7 +304,7 @@ def main():
     args.label2id = {label: i for i, label in enumerate(label_list)}
     num_labels = len(label_list)
 
-    # Load pretrained model and tokenizer`
+    # Load pretrained model and tokenizer
     args.model_type = args.model_type.lower()
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
     config = config_class.from_pretrained(args.model_name_or_path)
