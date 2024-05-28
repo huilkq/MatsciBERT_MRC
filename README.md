@@ -21,7 +21,7 @@ The following commands can be used to download the preprocessed Matscholar datas
 ## Entity Model
 
 ### Input data format for the entity model
-
+```
 The input data format of the entity model is JSONL. Each line of the input file contains one document in the following format.
   {
     "context": [
@@ -60,7 +60,7 @@ The input data format of the entity model is JSONL. Each line of the input file 
     ],
     "entity_label": "MAT"
   }
-
+```
 ### Train/evaluate the entity model
 
 You can use `run_entity.py` with `--do_train` to train an entity model and with `--do_eval` to evaluate an entity model.
