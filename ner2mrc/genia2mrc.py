@@ -166,7 +166,7 @@ queries_SOFC_slot = {'anode_material': 'Fuel cell’s anode.',
 queries_CHEMD = {'Chemical': 'Pure substances and mixtures composed of various elements.'}
 
 
-# 定义函数将BIO格式数据集转换为（上下文，查询，答案）三元组
+# The definition function converts the BIO format data set into (context, query, answer) triples
 def bio_to_triples(bio_file_path, triples_file_path):
     data = read_text(bio_file_path)
     origin_count = 0
@@ -178,7 +178,7 @@ def bio_to_triples(bio_file_path, triples_file_path):
         labels = instance["labels"]
         labels = get_entities(labels, id2label=None, markup='bio')
         print(labels)
-        # 遍历每个实体，并构造（上下文，查询，答案）三元组
+        # Iterate through each entity and construct (context, query, answer) triples
         for tag_idx, (tag, query) in enumerate(queries_Metal.items()):
             positions = []
             for label in labels:
@@ -199,7 +199,7 @@ def bio_to_triples(bio_file_path, triples_file_path):
             triples_data.append(mrc_sample)
             new_count += 1
 
-    # 将新生成的（上下文，查询，答案）三元组保存到文件中
+    # Saves the newly generated (context, query, answer) triples to a file
     json.dump(triples_data, open(triples_file_path, "w", encoding="utf-8-sig"), ensure_ascii=False, indent=2)
 
 
