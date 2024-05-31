@@ -11,9 +11,7 @@ pandas
 ```
 
 ### Download and preprocess the datasets
-Our experiments are based on five datasets: BC4CHEMD, Matscholar, NLMChem, SOFC-Slot and SOFC. Please find the links and pre-processing below:
-* ACE04/ACE05: We use the preprocessing code from [DyGIE repo](https://github.com/luanyi/DyGIE/tree/master/preprocessing). Please follow the instructions to preprocess the ACE05 and ACE04 datasets.
-* SciERC: The preprocessed SciERC dataset can be downloaded in their project [website](http://nlp.cs.washington.edu/sciIE/).
+Our experiments are based on five datasets: BC4CHEMD, Matscholar, NLMChem, SOFC-Slot and SOFC. 
 
 ## Quick Start
 The following commands can be used to download the preprocessed Matscholar dataset and run our pre-trained models on Matscholar.
